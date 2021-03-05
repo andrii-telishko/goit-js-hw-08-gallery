@@ -4,6 +4,7 @@ const galleryListRef = document.querySelector('.js-gallery')
 const modalRef = document.querySelector('.js-lightbox')
 const galleryModalIMGRef = document.querySelector('.lightbox__image')
 const modalCloseBtnRef = document.querySelector('.lightbox__button')
+const modalOverlayRef = document.querySelector('.lightbox__overlay')
 
 function createListMarkup(array) {
     const arrayMarkup =  array.map(({original, preview, description}) => 
@@ -30,6 +31,8 @@ galleryListRef.innerHTML = createListMarkup(galleryItems).join('');
 
 galleryListRef.addEventListener('click', onModalOpen)
 modalCloseBtnRef.addEventListener('click', onModalClose)
+modalOverlayRef.addEventListener('click', onModalClose)
+window.addEventListener('keydown', onModalCloseByKeyPress)
 
 function onModalOpen(event) {
     event.preventDefault()
@@ -42,9 +45,19 @@ function onModalOpen(event) {
   console.log();
 }
 
-function onModalClose () {
-  modalRef.classList.remove('is-open')
+function onModalClose(event) {
+  if (event.target === event.currentTarget) {
+    modalRef.classList.remove('is-open')
   galleryModalIMGRef.src = ''
   galleryModalIMGRef.alt = ''
+  }
+}
+
+function onModalCloseByKeyPress(event) {
+  
+  if (event.code === "Escape") {
+     modalRef.classList.remove('is-open')
+  }
+  
 }
 
