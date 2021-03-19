@@ -3,6 +3,7 @@ import refs from './refs.js'
 import listMarkup from './list-markup.js'
 
 
+
 refs.galleryList.innerHTML = listMarkup(galleryItems);
 
 refs.galleryList.addEventListener('click', onModalOpen)
@@ -35,12 +36,15 @@ function onModalClose(event) {
 
 
 const arrayWithImgRefs = galleryItems.map(item => item.original)
+
+
 const arrayWithAltRefs = galleryItems.map(item => item.description)
   
 
 function onModalChangeImgByKeyDown(event) {
     
-    let indexOfImg = arrayWithImgRefs.indexOf(refs.modalImg.src);
+  let indexOfImg = arrayWithImgRefs.indexOf(refs.modalImg.src);
+  
     let indexOfIAlt = indexOfImg
     const indexOfLastElement = arrayWithImgRefs.length-1
   if (event.code === 'ArrowRight') {
@@ -50,7 +54,7 @@ function onModalChangeImgByKeyDown(event) {
       
       getImgAttributes(arrayWithImgRefs[indexOfImg], arrayWithAltRefs[indexOfImg]);
     }
-    else if (indexOfImg = arrayWithImgRefs[indexOfLastElement]) {
+    else if (indexOfImg = indexOfLastElement) {
       
       getImgAttributes(arrayWithImgRefs[0], arrayWithAltRefs[0]);
     }
@@ -67,7 +71,10 @@ function onModalChangeImgByKeyDown(event) {
       getImgAttributes(arrayWithImgRefs[indexOfLastElement], arrayWithAltRefs[indexOfLastElement]);
     }
     }
-  }
+}
+  
+
+
 
   
 
